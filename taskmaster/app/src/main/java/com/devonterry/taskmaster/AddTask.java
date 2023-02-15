@@ -4,7 +4,9 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 public class AddTask extends AppCompatActivity {
 
@@ -17,7 +19,8 @@ public class AddTask extends AppCompatActivity {
 
         Button addTaskButton = (Button) findViewById(R.id.AddTaskActivityAddButton);
         addTaskButton.setOnClickListener(v -> {
-
+            TextView submittedTextView = (TextView) findViewById(R.id.AddActivitySubmittedTextView);
+            submittedTextView.setVisibility(View.VISIBLE);
         Log.e(TAG, "Submitted");
         });
     }

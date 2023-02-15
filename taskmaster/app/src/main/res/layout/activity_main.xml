@@ -5,33 +5,34 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#FEDC58"
+    android:clickable="true"
     tools:context=".MainActivity">
 
     <ImageView
         android:id="@+id/MainActivityFlowerLogo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="222dp"
+        android:layout_height="230dp"
+        android:layout_marginBottom="24dp"
         android:contentDescription="@string/flowerInAPotSayingDone"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/button3"
+        app:layout_constraintEnd_toEndOf="@+id/MainActivityTaskMasterHeader"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/MainActivityTaskMasterHeader"
         app:srcCompat="@drawable/tm_jpg" />
 
     <TextView
         android:id="@+id/MainActivityDoneTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="220dp"
-        android:layout_marginBottom="152dp"
         android:fontFamily="casual"
-        android:text="@string/done"
-        app:layout_constraintBottom_toTopOf="@+id/MainActivityAddATaskButton"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        android:text="@string/lowerCaseDoneQuestionmark"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toBottomOf="@+id/MainActivityFlowerLogo"
+        app:layout_constraintEnd_toEndOf="@+id/MainActivityFlowerLogo"
+        app:layout_constraintHorizontal_bias="0.577"
         app:layout_constraintStart_toStartOf="@+id/MainActivityFlowerLogo"
-        app:layout_constraintTop_toBottomOf="@+id/MainActivityTaskMasterHeader"
-        app:layout_constraintVertical_bias="1.0"
+        app:layout_constraintTop_toTopOf="@+id/MainActivityFlowerLogo"
+        app:layout_constraintVertical_bias="0.43"
         tools:textStyle="bold" />
 
     <TextView
@@ -41,13 +42,14 @@
         android:layout_marginTop="116dp"
         android:text="@string/taskMaster"
         android:textAlignment="center"
+        android:textColor="@color/black"
         android:textSize="48sp"
-        app:layout_constraintBottom_toBottomOf="@+id/MainActivityFlowerLogo"
+        app:layout_constraintBottom_toTopOf="@+id/button3"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.49"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0"
+        app:layout_constraintVertical_bias="0.045"
         tools:fontFamily="@font/aldrich"
         tools:textStyle="bold" />
 
@@ -56,9 +58,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="48dp"
-        android:layout_marginBottom="76dp"
+        android:layout_marginBottom="88dp"
+        android:backgroundTint="#329B2F"
         android:text="@string/allTasks"
-        app:layout_constraintBottom_toBottomOf="@+id/MainActivityFlowerLogo"
+        android:textColor="#020202"
+        android:textStyle="bold"
+        app:iconTint="@color/black"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
@@ -66,11 +72,61 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="48dp"
-        android:layout_marginBottom="76dp"
+        android:layout_marginBottom="88dp"
+        android:backgroundTint="#329C2F"
         android:text="@string/addATask"
-        app:layout_constraintBottom_toBottomOf="@+id/MainActivityFlowerLogo"
+        android:textColor="#FBFAFA"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <ImageButton
+        android:id="@+id/MainActivitySettingsButton"
+        android:layout_width="54dp"
+        android:layout_height="62dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:backgroundTint="#FEDC58"
+        android:contentDescription="@string/settingsButton"
+        android:foregroundTint="#760402"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.973"
-        app:layout_constraintStart_toEndOf="@+id/MainActivityAllTasksButton" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@android:drawable/ic_menu_manage"
+        app:tint="#760402"
+        tools:ignore="RedundantDescriptionCheck,ImageContrastCheck" />
+
+    <Button
+        android:id="@+id/button3"
+        android:layout_width="275dp"
+        android:layout_height="44dp"
+        android:layout_marginBottom="40dp"
+        android:backgroundTint="#760402"
+        android:text="Button"
+        app:layout_constraintBottom_toTopOf="@+id/button5"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/button5"
+        android:layout_width="275dp"
+        android:layout_height="44dp"
+        android:layout_marginBottom="40dp"
+        android:backgroundTint="#760402"
+        android:text="Button"
+        app:layout_constraintBottom_toTopOf="@+id/button6"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/button6"
+        android:layout_width="275dp"
+        android:layout_height="44dp"
+        android:layout_marginBottom="272dp"
+        android:backgroundTint="#760402"
+        android:text="Button"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.485"
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
