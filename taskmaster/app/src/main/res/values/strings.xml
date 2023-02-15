@@ -1,4 +1,16 @@
 <resources>
     <string name="app_name">taskmaster</string>
     <string name="helloWorld">Hello World</string>
+    <string name="taskMaster">Task Master</string>
+    <string name="done">done</string>
+    <string name="allTasks">All Tasks</string>
+    <string name="addATask">Add A Task</string>
+    <string name="flowerInAPotSayingDone">Flower in a pot saying the word \"done\"</string>
+    <string name="newTask">"New Task : "</string>
+    <string name="newTask2">New Task:</string>
+    <string name="add">Add</string>
+    <string name="addTaskHint">Add Task</string>
+    <string name="Submitted">Submitted!</string>
+    <string name="description">Description:</string>
+    <string name="descriptionNoColon">Description</string>
 </resources>
