@@ -5,4 +5,28 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#FEDC58"
-    tools:context=".TaskDetailActivity"/>
+    tools:context=".TaskDetailActivity">
+
+    <TextView
+        android:id="@+id/TaskDetailActivityTaskDetailsHeader"
+        android:layout_width="142dp"
+        android:layout_height="38dp"
+        android:layout_marginTop="164dp"
+        android:layout_marginEnd="144dp"
+        android:text="@string/taskDetails"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/TaskDetailActivityLoremIpsum"
+        android:layout_width="175dp"
+        android:layout_height="42dp"
+        android:layout_marginEnd="116dp"
+        android:layout_marginBottom="408dp"
+        android:text="@string/loremBlah"
+        android:textColor="#33691E"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+</androidx.constraintlayout.widget.ConstraintLayout>

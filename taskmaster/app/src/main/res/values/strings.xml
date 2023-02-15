@@ -15,5 +15,16 @@
     <string name="descriptionNoColon">Description</string>
     <string name="submittedExclamation">Submitted!</string>
     <string name="settingsButton">Settings Button</string>
-    <string name="lowerCaseDoneQuestionmark">done?</string>
+    <string name="lowerCaseDoneQuestionMark">done?</string>
+    <string name="makeABudget">Make A Budget</string>
+    <string name="learnFrench" />
+    <string name="learnFrench2">Learn French</string>
+    <string name="goForARun2">Go For A Run</string>
+    <string name="learnFrench3">Learn French</string>
+    <string name="watchYouPeople">Watch \"You People\"</string>
+    <string name="taskDetails">Task Details</string>
+    <string name="loremBlah">Lorem Ipsum blah, blah, blah</string>
+    <string name="name2">Name</string>
+    <string name="save">Save</string>
+    <string name="inputUsernameHere">Input UserName Here</string>
 </resources>
