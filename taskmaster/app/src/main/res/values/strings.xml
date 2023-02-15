@@ -14,4 +14,6 @@
     <string name="description">Description:</string>
     <string name="descriptionNoColon">Description</string>
     <string name="submittedExclamation">Submitted!</string>
+    <string name="settingsButton">Settings Button</string>
+    <string name="lowerCaseDoneQuestionmark">done?</string>
 </resources>
