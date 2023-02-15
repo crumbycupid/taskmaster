@@ -8,7 +8,7 @@
     tools:context=".MainActivity">
 
     <ImageView
-        android:id="@+id/activityMainLogo"
+        android:id="@+id/MainActivityFlowerLogo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:contentDescription="@string/flowerInAPotSayingDone"
@@ -19,32 +19,32 @@
         app:srcCompat="@drawable/tm_jpg" />
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/MainActivityDoneTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="220dp"
         android:layout_marginBottom="152dp"
         android:fontFamily="casual"
         android:text="@string/done"
-        app:layout_constraintBottom_toTopOf="@+id/button2"
+        app:layout_constraintBottom_toTopOf="@+id/MainActivityAddATaskButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/activityMainLogo"
-        app:layout_constraintTop_toBottomOf="@+id/textView2"
+        app:layout_constraintStart_toStartOf="@+id/MainActivityFlowerLogo"
+        app:layout_constraintTop_toBottomOf="@+id/MainActivityTaskMasterHeader"
         app:layout_constraintVertical_bias="1.0"
         tools:textStyle="bold" />
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/MainActivityTaskMasterHeader"
         android:layout_width="358dp"
         android:layout_height="57dp"
         android:layout_marginTop="116dp"
         android:text="@string/taskMaster"
         android:textAlignment="center"
         android:textSize="48sp"
-        app:layout_constraintBottom_toBottomOf="@+id/activityMainLogo"
+        app:layout_constraintBottom_toBottomOf="@+id/MainActivityFlowerLogo"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.301"
+        app:layout_constraintHorizontal_bias="0.49"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0"
@@ -52,25 +52,25 @@
         tools:textStyle="bold" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/MainActivityAllTasksButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="48dp"
         android:layout_marginBottom="76dp"
         android:text="@string/allTasks"
-        app:layout_constraintBottom_toBottomOf="@+id/activityMainLogo"
+        app:layout_constraintBottom_toBottomOf="@+id/MainActivityFlowerLogo"
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/MainActivityAddATaskButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="48dp"
         android:layout_marginBottom="76dp"
         android:text="@string/addATask"
-        app:layout_constraintBottom_toBottomOf="@+id/activityMainLogo"
+        app:layout_constraintBottom_toBottomOf="@+id/MainActivityFlowerLogo"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.973"
-        app:layout_constraintStart_toEndOf="@+id/button" />
+        app:layout_constraintStart_toEndOf="@+id/MainActivityAllTasksButton" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

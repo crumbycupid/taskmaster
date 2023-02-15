@@ -10,4 +10,7 @@
     <string name="newTask2">New Task:</string>
     <string name="add">Add</string>
     <string name="addTaskHint">Add Task</string>
+    <string name="Submitted">Submitted!</string>
+    <string name="description">Description:</string>
+    <string name="descriptionNoColon">Description</string>
 </resources>
