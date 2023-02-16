@@ -12,31 +12,13 @@
         android:id="@+id/MainActivityFlowerLogo"
         android:layout_width="222dp"
         android:layout_height="230dp"
-        android:layout_marginBottom="24dp"
+        android:layout_marginBottom="48dp"
         android:contentDescription="@string/flowerInAPotSayingDone"
         app:layout_constraintBottom_toTopOf="@+id/MainActivityBudgetButton"
-        app:layout_constraintEnd_toEndOf="@+id/MainActivityTaskMasterHeader"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/MainActivityTaskMasterHeader"
+        app:layout_constraintEnd_toEndOf="@+id/MainActivityUserNameTextView"
+        app:layout_constraintHorizontal_bias="0.492"
+        app:layout_constraintStart_toStartOf="@+id/MainActivityUserNameTextView"
         app:srcCompat="@drawable/tm_jpg" />
-
-    <TextView
-        android:id="@+id/MainActivityTaskMasterHeader"
-        android:layout_width="358dp"
-        android:layout_height="57dp"
-        android:layout_marginTop="116dp"
-        android:text="@string/taskMaster"
-        android:textAlignment="center"
-        android:textColor="#2E3133"
-        android:textSize="48sp"
-        app:layout_constraintBottom_toTopOf="@+id/MainActivityBudgetButton"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.49"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.045"
-        tools:fontFamily="@font/aldrich"
-        tools:textStyle="bold" />
 
     <Button
         android:id="@+id/MainActivityAllTasksButton"
@@ -51,6 +33,7 @@
         app:iconTint="@color/black"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/MainActivityAddATaskButton"
         tools:ignore="TextContrastCheck" />
 
     <Button
@@ -108,12 +91,11 @@
         android:id="@+id/MainActivityWatchYouPeopleButton"
         android:layout_width="275dp"
         android:layout_height="48dp"
-        android:layout_marginBottom="272dp"
+        android:layout_marginBottom="84dp"
         android:backgroundTint="#760402"
         android:text="@string/watchYouPeople"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/MainActivityAllTasksButton"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.485"
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
@@ -129,5 +111,16 @@
         app:layout_constraintHorizontal_bias="0.615"
         app:layout_constraintStart_toStartOf="@+id/MainActivityFlowerLogo"
         tools:ignore="TextContrastCheck" />
+
+    <TextView
+        android:id="@+id/MainActivityUserNameTextView"
+        android:layout_width="285dp"
+        android:layout_height="49dp"
+        android:layout_marginBottom="72dp"
+        android:textAlignment="center"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toTopOf="@+id/MainActivityBudgetButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
