@@ -2,23 +2,11 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/textBox"
+    android:id="@+id/MainActivity"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#FEDC58"
     android:clickable="true">
-
-    <ImageView
-        android:id="@+id/MainActivityFlowerLogo"
-        android:layout_width="222dp"
-        android:layout_height="230dp"
-        android:layout_marginBottom="48dp"
-        android:contentDescription="@string/flowerInAPotSayingDone"
-        app:layout_constraintBottom_toTopOf="@+id/MainActivityBudgetButton"
-        app:layout_constraintEnd_toEndOf="@+id/MainActivityUserNameTextView"
-        app:layout_constraintHorizontal_bias="0.492"
-        app:layout_constraintStart_toStartOf="@+id/MainActivityUserNameTextView"
-        app:srcCompat="@drawable/tm_jpg" />
 
     <Button
         android:id="@+id/MainActivityAllTasksButton"
@@ -65,38 +53,28 @@
         app:tint="#760402"
         tools:ignore="RedundantDescriptionCheck,ImageContrastCheck" />
 
-    <Button
-        android:id="@+id/MainActivityBudgetButton"
-        android:layout_width="275dp"
-        android:layout_height="48dp"
-        android:layout_marginBottom="40dp"
-        android:backgroundTint="#760402"
-        android:text="@string/makeABudget"
-        app:layout_constraintBottom_toTopOf="@+id/MainActivityLearnFrenchButton"
+    <TextView
+        android:id="@+id/MainActivityUserNameTextView"
+        android:layout_width="285dp"
+        android:layout_height="49dp"
+        android:layout_marginBottom="20dp"
+        android:textAlignment="center"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="@+id/MainActivityFlowerLogo"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
-    <Button
-        android:id="@+id/MainActivityLearnFrenchButton"
-        android:layout_width="275dp"
-        android:layout_height="48dp"
-        android:layout_marginBottom="40dp"
-        android:backgroundTint="#760402"
-        android:text="@string/learnFrench3"
-        app:layout_constraintBottom_toTopOf="@+id/MainActivityWatchYouPeopleButton"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <Button
-        android:id="@+id/MainActivityWatchYouPeopleButton"
-        android:layout_width="275dp"
-        android:layout_height="48dp"
-        android:layout_marginBottom="84dp"
-        android:backgroundTint="#760402"
-        android:text="@string/watchYouPeople"
-        app:layout_constraintBottom_toTopOf="@+id/MainActivityAllTasksButton"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+    <ImageView
+        android:id="@+id/MainActivityFlowerLogo"
+        android:layout_width="222dp"
+        android:layout_height="230dp"
+        android:layout_marginBottom="12dp"
+        android:contentDescription="@string/flowerInAPotSayingDone"
+        app:layout_constraintBottom_toTopOf="@+id/MainActivityRecyclerView"
+        app:layout_constraintEnd_toEndOf="@+id/MainActivityUserNameTextView"
+        app:layout_constraintHorizontal_bias="0.492"
+        app:layout_constraintStart_toStartOf="@+id/MainActivityUserNameTextView"
+        app:srcCompat="@drawable/tm_jpg" />
 
     <TextView
         android:id="@+id/textView"
@@ -112,15 +90,14 @@
         app:layout_constraintStart_toStartOf="@+id/MainActivityFlowerLogo"
         tools:ignore="TextContrastCheck" />
 
-    <TextView
-        android:id="@+id/MainActivityUserNameTextView"
-        android:layout_width="285dp"
-        android:layout_height="49dp"
-        android:layout_marginBottom="72dp"
-        android:textAlignment="center"
-        android:textSize="24sp"
-        app:layout_constraintBottom_toTopOf="@+id/MainActivityBudgetButton"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/MainActivityRecyclerView"
+        android:layout_width="322dp"
+        android:layout_height="376dp"
+        android:layout_marginBottom="12dp"
+        app:layout_constraintBottom_toTopOf="@+id/MainActivityAllTasksButton"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.494"
         app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

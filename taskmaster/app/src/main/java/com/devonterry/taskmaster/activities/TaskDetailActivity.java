@@ -1,10 +1,13 @@
-package com.devonterry.taskmaster;
+package com.devonterry.taskmaster.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.TextView;
+
+import com.devonterry.taskmaster.R;
+import com.devonterry.taskmaster.activities.MainActivity;
 
 public class TaskDetailActivity extends AppCompatActivity {
 

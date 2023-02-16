@@ -1,4 +1,4 @@
-package com.devonterry.taskmaster;
+package com.devonterry.taskmaster.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -8,7 +8,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-public class AddTask extends AppCompatActivity {
+import com.devonterry.taskmaster.R;
+
+public class AddTaskActivity extends AppCompatActivity {
 
     public final String TAG = "MainActivity";
 
