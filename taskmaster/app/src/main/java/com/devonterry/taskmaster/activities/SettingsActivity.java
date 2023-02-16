@@ -1,4 +1,4 @@
-package com.devonterry.taskmaster;
+package com.devonterry.taskmaster.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -8,6 +8,7 @@ import android.preference.PreferenceManager;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.devonterry.taskmaster.R;
 import com.google.android.material.snackbar.Snackbar;
 
 public class SettingsActivity extends AppCompatActivity {

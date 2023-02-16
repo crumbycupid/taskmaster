@@ -5,13 +5,13 @@
     android:id="@+id/AddTaskActivityNewTaskTextView"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".AddTask">
+    tools:context=".activities.AddTaskActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="#FEDC58"
-        tools:context=".AllTasks"
+        tools:context=".activities.AllTasksActivity"
         tools:layout_editor_absoluteX="50dp"
         tools:layout_editor_absoluteY="-16dp">
 
