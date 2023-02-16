@@ -2,26 +2,36 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/settingsActivity"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FEDC58"
-    tools:context=".SettingsActivity">
+    android:autofillHints="@string/name2"
+    android:background="#FEDC58">
 
     <EditText
         android:id="@+id/SettingsActivityNameInputTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="284dp"
+        android:layout_marginEnd="100dp"
         android:ems="10"
+        android:hint="@string/inputUsernameHere"
+        android:importantForAutofill="no"
         android:inputType="textPersonName"
-        android:text="Name"
-        tools:layout_editor_absoluteX="100dp"
-        tools:layout_editor_absoluteY="228dp" />
+        android:minHeight="48dp"
+        android:textColorHint="#33691E"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/SettingsActivitySaveButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Button"
-        tools:layout_editor_absoluteX="158dp"
-        tools:layout_editor_absoluteY="416dp" />
+        android:layout_marginEnd="172dp"
+        android:layout_marginBottom="292dp"
+        android:backgroundTint="#289F2A"
+        android:text="@string/save"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
