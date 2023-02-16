@@ -21,10 +21,9 @@ import com.devonterry.taskmaster.model.Task;
 import java.util.ArrayList;
 import java.util.List;
 
-//import org.w3c.dom.Text;
 
 public class MainActivity extends AppCompatActivity {
-    public static final String TASK_ADD_EXTRA_TAG = "taskDetail";
+//    public static final String TASK_ADD_EXTRA_TAG = "taskDetail";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -77,15 +76,15 @@ public class MainActivity extends AppCompatActivity {
 
     public void taskRecyclerView() {
         List<Task> taskList = new ArrayList<>();
-    Task task = new Task("Name", "Body");
-    Task task2 = new Task("Name", "Body");
-    Task task3 = new Task("Name", "Body");
-    Task task4 = new Task("Name", "Body");
-    Task task5 = new Task("Name", "Body");
-    Task task6 = new Task("Name", "Body");
-    Task task7 = new Task("Name", "Body");
-    Task task8 = new Task("Name", "Body");
-    Task task9 = new Task("Name", "Body");
+    Task task = new Task("Name", "Body", "new");
+    Task task2 = new Task("Name", "Body", "new");
+    Task task3 = new Task("Name", "Body", "new");
+    Task task4 = new Task("Name", "Body", "new");
+    Task task5 = new Task("Name", "Body", "new");
+    Task task6 = new Task("Name", "Body", "new");
+    Task task7 = new Task("Name", "Body", "new");
+    Task task8 = new Task("Name", "Body", "new");
+    Task task9 = new Task("Name", "Body", "new");
     taskList.add(task);
         taskList.add(task2);
         taskList.add(task3);
@@ -99,7 +98,7 @@ public class MainActivity extends AppCompatActivity {
         RecyclerView tasksRecyclerView = findViewById(R.id.MainActivityRecyclerView);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
         tasksRecyclerView.setLayoutManager(layoutManager);
-        TaskRecyclerViewAdapter adapter = new TaskRecyclerViewAdapter(taskList);
+        TaskRecyclerViewAdapter adapter = new TaskRecyclerViewAdapter(taskList, this);
         tasksRecyclerView.setAdapter(adapter);
     }
 

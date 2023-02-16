@@ -68,13 +68,11 @@
         android:id="@+id/MainActivityFlowerLogo"
         android:layout_width="222dp"
         android:layout_height="230dp"
-        android:layout_marginBottom="12dp"
+        android:layout_marginBottom="8dp"
         android:contentDescription="@string/flowerInAPotSayingDone"
         app:layout_constraintBottom_toTopOf="@+id/MainActivityRecyclerView"
-        app:layout_constraintEnd_toEndOf="@+id/MainActivityUserNameTextView"
-        app:layout_constraintHorizontal_bias="0.492"
-        app:layout_constraintStart_toStartOf="@+id/MainActivityUserNameTextView"
-        app:srcCompat="@drawable/tm_jpg" />
+        app:srcCompat="@drawable/tm_jpg"
+        tools:layout_editor_absoluteX="94dp" />
 
     <TextView
         android:id="@+id/textView"
@@ -99,5 +97,11 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.494"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <androidx.constraintlayout.helper.widget.Layer
+        android:id="@+id/layer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:constraint_referenced_ids="MainActivityUserNameTextView" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

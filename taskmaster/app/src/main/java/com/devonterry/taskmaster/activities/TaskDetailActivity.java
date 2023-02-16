@@ -7,7 +7,7 @@ import android.os.Bundle;
 import android.widget.TextView;
 
 import com.devonterry.taskmaster.R;
-import com.devonterry.taskmaster.activities.MainActivity;
+import com.devonterry.taskmaster.adapter.TaskRecyclerViewAdapter;
 
 public class TaskDetailActivity extends AppCompatActivity {
 
@@ -15,16 +15,21 @@ public class TaskDetailActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_task_detail);
+        consumeExtras();
+    }
+
+    public void consumeExtras() {
         Intent callingIntent = getIntent();
-        String userTaskString;
-        if (callingIntent !=null){
-            userTaskString = callingIntent.getStringExtra(MainActivity.TASK_ADD_EXTRA_TAG);
-            TextView userTaskTextView = (TextView) findViewById(R.id.TaskDetailActivityTextView);
-            if (userTaskString != null) {
-                userTaskTextView.setText(userTaskString);
-            }else {
-                userTaskTextView.setText(R.string.no_input);
-            }
+        String userTaskTitle = null;
+        String userTaskBody = null;
+        String userTaskState = null;
+        if (callingIntent != null) {
+            userTaskTitle = callingIntent.getStringExtra(TaskRecyclerViewAdapter.USER_TASK_TITLE_TAG);
+            userTaskBody = callingIntent.getStringExtra(TaskRecyclerViewAdapter.USER_TASK_BODY_TAG);
+            userTaskState = callingIntent.getStringExtra(TaskRecyclerViewAdapter.USER_TASK_STATE_TAG);
         }
+        ((TextView)findViewById(R.id.TaskDetailActivityTVTitle)).setText(userTaskTitle);
+        ((TextView)findViewById(R.id.TaskDetailActivityTVBody)).setText(userTaskBody);
+        ((TextView)findViewById(R.id.TaskDetailActivityTVState)).setText(userTaskState);
     }
 }
