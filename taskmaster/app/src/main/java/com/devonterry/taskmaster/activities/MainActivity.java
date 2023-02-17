@@ -5,6 +5,7 @@ import static com.devonterry.taskmaster.activities.SettingsActivity.USER_USERNAM
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.room.Room;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -16,18 +17,33 @@ import android.widget.TextView;
 
 import com.devonterry.taskmaster.R;
 import com.devonterry.taskmaster.adapter.TaskRecyclerViewAdapter;
+import com.devonterry.taskmaster.database.TaskMasterDatabase;
 import com.devonterry.taskmaster.model.Task;
 
-import java.util.ArrayList;
 import java.util.List;
 
 
 public class MainActivity extends AppCompatActivity {
-//    public static final String TASK_ADD_EXTRA_TAG = "taskDetail";
+    TaskMasterDatabase taskMasterDatabase;
+    public static final String DATABASE_NAME = "task_master";
+    List<Task> taskList;
+    TaskRecyclerViewAdapter adapter;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        taskMasterDatabase = Room.databaseBuilder(
+                getApplicationContext(),
+                TaskMasterDatabase.class,
+                DATABASE_NAME)
+                .fallbackToDestructiveMigration()
+                .allowMainThreadQueries()
+                .build();
+
+
         taskRecyclerView();
 
         Button allTasksButton = (Button) findViewById(R.id.MainActivityAllTasksButton);
@@ -47,6 +63,26 @@ public class MainActivity extends AppCompatActivity {
             Intent goToSettingsIntent = new Intent(this, SettingsActivity.class);
             startActivity(goToSettingsIntent);
         });
+
+    }
+    public void taskRecyclerView() {
+        RecyclerView tasksRecyclerView = findViewById(R.id.MainActivityRecyclerView);
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
+        tasksRecyclerView.setLayoutManager(layoutManager);
+        TaskRecyclerViewAdapter adapter = new TaskRecyclerViewAdapter(taskList, this);
+        tasksRecyclerView.setAdapter(adapter);
+    }
+
+    @Override
+    protected void  onResume() {
+
+        super.onResume();
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
+        String userUserName = preferences.getString(USER_USERNAME_TAG, "No Username");
+        ((TextView)findViewById(R.id.MainActivityUserNameTextView)).setText(userUserName + "'s Tasks");
+    }
+}
+
 
 //        TextView taskDetailButtonOne = (TextView) findViewById(R.id.MainActivityBudgetButton);
 //        taskDetailButtonOne.setOnClickListener(v -> {
@@ -71,43 +107,3 @@ public class MainActivity extends AppCompatActivity {
 //            goToTaskDetailIntent.putExtra(TASK_ADD_EXTRA_TAG, taskDetail);
 //            startActivity(goToTaskDetailIntent);
 //        });
-
-    }
-
-    public void taskRecyclerView() {
-        List<Task> taskList = new ArrayList<>();
-    Task task = new Task("Name", "Body", "new");
-    Task task2 = new Task("Name", "Body", "new");
-    Task task3 = new Task("Name", "Body", "new");
-    Task task4 = new Task("Name", "Body", "new");
-    Task task5 = new Task("Name", "Body", "new");
-    Task task6 = new Task("Name", "Body", "new");
-    Task task7 = new Task("Name", "Body", "new");
-    Task task8 = new Task("Name", "Body", "new");
-    Task task9 = new Task("Name", "Body", "new");
-    taskList.add(task);
-        taskList.add(task2);
-        taskList.add(task3);
-        taskList.add(task4);
-        taskList.add(task5);
-        taskList.add(task6);
-        taskList.add(task7);
-        taskList.add(task8);
-        taskList.add(task9);
-
-        RecyclerView tasksRecyclerView = findViewById(R.id.MainActivityRecyclerView);
-        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
-        tasksRecyclerView.setLayoutManager(layoutManager);
-        TaskRecyclerViewAdapter adapter = new TaskRecyclerViewAdapter(taskList, this);
-        tasksRecyclerView.setAdapter(adapter);
-    }
-
-    @Override
-    protected void  onResume() {
-
-        super.onResume();
-        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
-        String userUserName = preferences.getString(USER_USERNAME_TAG, "No Username");
-        ((TextView)findViewById(R.id.MainActivityUserNameTextView)).setText(userUserName + "'s Tasks");
-    }
-}

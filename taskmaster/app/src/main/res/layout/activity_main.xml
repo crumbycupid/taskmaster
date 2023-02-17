@@ -69,6 +69,7 @@
         android:layout_width="222dp"
         android:layout_height="230dp"
         android:layout_marginBottom="8dp"
+        android:background="#00FFFFFF"
         android:contentDescription="@string/flowerInAPotSayingDone"
         app:layout_constraintBottom_toTopOf="@+id/MainActivityRecyclerView"
         app:srcCompat="@drawable/tm_jpg"

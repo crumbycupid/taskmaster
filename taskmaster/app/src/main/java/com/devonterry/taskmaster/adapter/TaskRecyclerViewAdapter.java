@@ -19,7 +19,7 @@ import java.util.List;
 public class TaskRecyclerViewAdapter extends RecyclerView.Adapter <TaskRecyclerViewAdapter.TaskViewHolder>{
     public static final String USER_TASK_TITLE_TAG = "task_title";
     public static final String USER_TASK_BODY_TAG = "task_body";
-    public static final String USER_TASK_STATE_TAG = "task_state";
+    public static final Enum USER_TASK_STATE_TAG = "task_state";
 
     Context callingActivity;
 
@@ -43,10 +43,10 @@ public class TaskRecyclerViewAdapter extends RecyclerView.Adapter <TaskRecyclerV
         TextView taskFragStateView = holder.itemView.findViewById((R.id.TaskFragTVState));
         String taskTitle = taskList.get(position).getTaskTitle();
         String taskBody = taskList.get(position).getTaskBody();
-        String taskState = taskList.get(position).getTaskState();
+//        Enum taskState = taskList.get(position).getTaskStateEnum();
         taskFragNameView.setText(taskTitle);
         taskFragBodyView.setText(taskBody);
-        taskFragStateView.setText(taskState);
+//        taskFragStateView.setText(taskState);
         View userTaskViewHolder = holder.itemView;
         userTaskViewHolder.setOnClickListener(v ->{
             Intent goToUserTasksDetailsIntent = new Intent(callingActivity, TaskDetailActivity.class);
