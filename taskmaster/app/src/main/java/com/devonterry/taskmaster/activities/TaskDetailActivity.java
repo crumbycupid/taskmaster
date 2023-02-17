@@ -22,7 +22,7 @@ public class TaskDetailActivity extends AppCompatActivity {
         Intent callingIntent = getIntent();
         String userTaskTitle = null;
         String userTaskBody = null;
-        String userTaskState = null;
+        Enum userTaskState = null;
         if (callingIntent != null) {
             userTaskTitle = callingIntent.getStringExtra(TaskRecyclerViewAdapter.USER_TASK_TITLE_TAG);
             userTaskBody = callingIntent.getStringExtra(TaskRecyclerViewAdapter.USER_TASK_BODY_TAG);
