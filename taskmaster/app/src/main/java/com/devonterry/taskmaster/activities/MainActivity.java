@@ -28,6 +28,7 @@ public class MainActivity extends AppCompatActivity {
     public static final String DATABASE_NAME = "task_master";
     List<Task> taskList;
     TaskRecyclerViewAdapter adapter;
+    SharedPreferences preferences;
 
 
     @Override
@@ -36,14 +37,15 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         taskMasterDatabase = Room.databaseBuilder(
-                getApplicationContext(),
-                TaskMasterDatabase.class,
-                DATABASE_NAME)
+                        getApplicationContext(),
+                        TaskMasterDatabase.class,
+                        DATABASE_NAME)
                 .fallbackToDestructiveMigration()
                 .allowMainThreadQueries()
                 .build();
 
-
+        preferences = PreferenceManager.getDefaultSharedPreferences(this);
+        taskList = taskMasterDatabase.taskDao().findAll();
         taskRecyclerView();
 
         Button allTasksButton = (Button) findViewById(R.id.MainActivityAllTasksButton);
@@ -63,13 +65,12 @@ public class MainActivity extends AppCompatActivity {
             Intent goToSettingsIntent = new Intent(this, SettingsActivity.class);
             startActivity(goToSettingsIntent);
         });
-
     }
     public void taskRecyclerView() {
         RecyclerView tasksRecyclerView = findViewById(R.id.MainActivityRecyclerView);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
         tasksRecyclerView.setLayoutManager(layoutManager);
-        TaskRecyclerViewAdapter adapter = new TaskRecyclerViewAdapter(taskList, this);
+        adapter = new TaskRecyclerViewAdapter(taskList, this);
         tasksRecyclerView.setAdapter(adapter);
     }
 
@@ -77,9 +78,11 @@ public class MainActivity extends AppCompatActivity {
     protected void  onResume() {
 
         super.onResume();
-        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
+        taskList.clear();
+        taskList.addAll(taskMasterDatabase.taskDao().findAll());
         String userUserName = preferences.getString(USER_USERNAME_TAG, "No Username");
         ((TextView)findViewById(R.id.MainActivityUserNameTextView)).setText(userUserName + "'s Tasks");
+        adapter.notifyDataSetChanged();
     }
 }
 
@@ -107,3 +110,4 @@ public class MainActivity extends AppCompatActivity {
 //            goToTaskDetailIntent.putExtra(TASK_ADD_EXTRA_TAG, taskDetail);
 //            startActivity(goToTaskDetailIntent);
 //        });
+

@@ -16,10 +16,11 @@ import com.devonterry.taskmaster.model.Task;
 
 import java.util.List;
 
+
 public class TaskRecyclerViewAdapter extends RecyclerView.Adapter <TaskRecyclerViewAdapter.TaskViewHolder>{
     public static final String USER_TASK_TITLE_TAG = "task_title";
     public static final String USER_TASK_BODY_TAG = "task_body";
-    public static final Enum USER_TASK_STATE_TAG = "task_state";
+//    public static final Enum USER_TASK_STATE_TAG = "task_state";
 
     Context callingActivity;
 
@@ -52,7 +53,7 @@ public class TaskRecyclerViewAdapter extends RecyclerView.Adapter <TaskRecyclerV
             Intent goToUserTasksDetailsIntent = new Intent(callingActivity, TaskDetailActivity.class);
             goToUserTasksDetailsIntent.putExtra(USER_TASK_TITLE_TAG, taskTitle);
             goToUserTasksDetailsIntent.putExtra(USER_TASK_BODY_TAG, taskBody);
-            goToUserTasksDetailsIntent.putExtra(USER_TASK_STATE_TAG, taskState);
+//            goToUserTasksDetailsIntent.putExtra(USER_TASK_STATE_TAG, taskState);
             callingActivity.startActivity(goToUserTasksDetailsIntent);
         });
     }

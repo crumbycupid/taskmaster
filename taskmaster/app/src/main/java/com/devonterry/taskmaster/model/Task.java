@@ -20,6 +20,7 @@ public class Task {
         this.taskState = taskState;
     }
 
+
     public TaskStateEnum getTaskState() {return taskState;}
 
     public Long getId() {return id;}
@@ -61,9 +62,7 @@ public class Task {
 
         @Override
         public String toString(){
-            return "TaskStateEnum{" +
-                    "taskState='" + taskState + '\'' +
-                    '}';
+            return taskState;
         }
     }
 }
