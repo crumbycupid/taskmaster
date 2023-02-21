@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -46,6 +47,12 @@ public class AddTaskActivity extends AppCompatActivity {
     public void saveButton(){
         Button addTaskButton = (Button) findViewById(R.id.AddTaskActivityAddButton);
         addTaskButton.setOnClickListener(v -> {
+            Task newTask = new Task(
+                    ((EditText)findViewById(R.id.AddTaskActivityAddTaskEditTextBox)).getText().toString(),
+            ((EditText)findViewById(R.id.editTextTextPersonName)).getText().toString(),
+                    Task.TaskStateEnum.fromString(taskTypeSpinner.getSelectedItem().toString()));
+
+
             TextView submittedTextView = (TextView) findViewById(R.id.AddActivitySubmittedTextView);
             submittedTextView.setVisibility(View.VISIBLE);
         });

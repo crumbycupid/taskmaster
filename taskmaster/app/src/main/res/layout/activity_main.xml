@@ -57,10 +57,9 @@
         android:id="@+id/MainActivityUserNameTextView"
         android:layout_width="285dp"
         android:layout_height="49dp"
-        android:layout_marginBottom="20dp"
         android:textAlignment="center"
         android:textSize="24sp"
-        app:layout_constraintBottom_toBottomOf="@+id/MainActivityFlowerLogo"
+        app:layout_constraintBottom_toTopOf="@+id/MainActivityRecyclerView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
@@ -68,12 +67,13 @@
         android:id="@+id/MainActivityFlowerLogo"
         android:layout_width="222dp"
         android:layout_height="230dp"
-        android:layout_marginBottom="8dp"
+        android:layout_marginBottom="48dp"
         android:background="#00FFFFFF"
         android:contentDescription="@string/flowerInAPotSayingDone"
         app:layout_constraintBottom_toTopOf="@+id/MainActivityRecyclerView"
-        app:srcCompat="@drawable/tm_jpg"
-        tools:layout_editor_absoluteX="94dp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/tm_jpg" />
 
     <TextView
         android:id="@+id/textView"
@@ -91,18 +91,12 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/MainActivityRecyclerView"
-        android:layout_width="322dp"
-        android:layout_height="376dp"
+        android:layout_width="319dp"
+        android:layout_height="321dp"
         android:layout_marginBottom="12dp"
         app:layout_constraintBottom_toTopOf="@+id/MainActivityAllTasksButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.494"
         app:layout_constraintStart_toStartOf="parent" />
-
-    <androidx.constraintlayout.helper.widget.Layer
-        android:id="@+id/layer"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:constraint_referenced_ids="MainActivityUserNameTextView" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
