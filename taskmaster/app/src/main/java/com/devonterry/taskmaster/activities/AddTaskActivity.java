@@ -1,9 +1,8 @@
 package com.devonterry.taskmaster.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.room.Room;
-
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -11,28 +10,22 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import com.amplifyframework.api.graphql.model.ModelMutation;
+import com.amplifyframework.core.Amplify;
+import com.amplifyframework.datastore.generated.model.Task;
+import com.amplifyframework.datastore.generated.model.TaskStateEnum;
 import com.devonterry.taskmaster.R;
-import com.devonterry.taskmaster.database.TaskMasterDatabase;
-import com.devonterry.taskmaster.model.Task;
 
 public class AddTaskActivity extends AppCompatActivity {
-    TaskMasterDatabase taskMasterDatabase;
     Spinner taskTypeSpinner;
 
-//    public final String TAG = "MainActivity";
+    public final String TAG = "MainActivity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_task);
         taskTypeSpinner = findViewById(R.id.AddTaskActivityStateSpinner);
-        taskMasterDatabase =  Room.databaseBuilder(
-                        getApplicationContext(),
-                        TaskMasterDatabase.class,
-                        MainActivity.DATABASE_NAME)
-                .fallbackToDestructiveMigration()
-                .allowMainThreadQueries()
-                .build();
         taskTypeSpinner();
         saveButton();
     }
@@ -41,18 +34,23 @@ public class AddTaskActivity extends AppCompatActivity {
         taskTypeSpinner.setAdapter(new ArrayAdapter<>(
                 this,
                 android.R.layout.simple_spinner_item,
-                Task.TaskStateEnum.values()
+                TaskStateEnum.values()
         ));
     }
     public void saveButton(){
         Button addTaskButton = (Button) findViewById(R.id.AddTaskActivityAddButton);
         addTaskButton.setOnClickListener(v -> {
-            Task newTask = new Task(
-                    ((EditText)findViewById(R.id.AddTaskActivityAddTaskEditTextBox)).getText().toString(),
-            ((EditText)findViewById(R.id.editTextTextPersonName)).getText().toString(),
-                    Task.TaskStateEnum.fromString(taskTypeSpinner.getSelectedItem().toString()));
+            Task newTask = Task.builder()
+                    .taskTitle(((EditText)findViewById(R.id.AddTaskActivityAddTaskEditTextBox)).getText().toString())
+                    .taskBody(((TextView) findViewById(R.id.AddTaskActivityDescriptionTextView)).getText().toString())
+                    .taskState((TaskStateEnum)taskTypeSpinner.getSelectedItem())
+                    .build();
 
-
+            Amplify.API.mutate(
+                    ModelMutation.create(newTask),
+                    success -> Log.i(TAG, "Task created successfully!"),
+                    failure -> Log.e(TAG, "FAILED to create task!", failure)
+            );
             TextView submittedTextView = (TextView) findViewById(R.id.AddActivitySubmittedTextView);
             submittedTextView.setVisibility(View.VISIBLE);
         });
