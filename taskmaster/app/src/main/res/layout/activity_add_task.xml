@@ -76,7 +76,7 @@
             app:layout_constraintVertical_bias="0.89" />
 
         <EditText
-            android:id="@+id/editTextTextPersonName"
+            android:id="@+id/AddTaskActivityDescriptionTV"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="28dp"
@@ -111,7 +111,7 @@
             android:layout_marginTop="20dp"
             android:layout_marginEnd="60dp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName" />
+            app:layout_constraintTop_toBottomOf="@+id/AddTaskActivityDescriptionTV" />
 
         <TextView
             android:id="@+id/AddTaskActivityStateTV"

@@ -1,72 +1,75 @@
 package com.devonterry.taskmaster.activities;
 
-import static com.devonterry.taskmaster.activities.SettingsActivity.USER_USERNAME_TAG;
-
+//import static com.devonterry.taskmaster.activities.SettingsActivity.USER_USERNAME_TAG;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import androidx.room.Room;
-
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
+//import android.preference.PreferenceManager;
+import android.util.Log;
 import android.widget.Button;
 import android.widget.ImageButton;
-import android.widget.TextView;
-
+//import android.widget.TextView;
+import com.amplifyframework.api.graphql.model.ModelQuery;
+import com.amplifyframework.core.Amplify;
+import com.amplifyframework.datastore.generated.model.Task;
+import com.amplifyframework.datastore.generated.model.TaskStateEnum;
 import com.devonterry.taskmaster.R;
 import com.devonterry.taskmaster.adapter.TaskRecyclerViewAdapter;
-import com.devonterry.taskmaster.database.TaskMasterDatabase;
-import com.devonterry.taskmaster.model.Task;
+//import com.devonterry.taskmaster.model.Task;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
 public class MainActivity extends AppCompatActivity {
-    TaskMasterDatabase taskMasterDatabase;
-    public static final String DATABASE_NAME = "task_master";
+    public static final String TAG = "mainActivity";
     List<Task> taskList;
     TaskRecyclerViewAdapter adapter;
-    SharedPreferences preferences;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        //Hardcoded Task Data
+//        taskList = new ArrayList<>();
+//        Task newTask = Task.builder()
+//                .taskTitle("run")
+//                        .taskBody("run")
+//                .taskState(TaskStateEnum.Assigned)
+//                        .build();
 
-        taskMasterDatabase = Room.databaseBuilder(
-                        getApplicationContext(),
-                        TaskMasterDatabase.class,
-                        DATABASE_NAME)
-                .fallbackToDestructiveMigration()
-                .allowMainThreadQueries()
-                .build();
-
-        preferences = PreferenceManager.getDefaultSharedPreferences(this);
-        taskList = taskMasterDatabase.taskDao().findAll();
+//        preferences = PreferenceManager.getDefaultSharedPreferences(this);
         taskRecyclerView();
+        setupBttns();
 
-        Button allTasksButton = (Button) findViewById(R.id.MainActivityAllTasksButton);
-        allTasksButton.setOnClickListener(v -> {
-            Intent goToAllTasksIntent = new Intent(this, AllTasksActivity.class);
-            startActivity(goToAllTasksIntent);
-        });
+    }
+    @Override
+    protected void  onResume() {
 
-        Button addATaskButton = (Button) findViewById(R.id.MainActivityAddATaskButton);
-        addATaskButton.setOnClickListener(v -> {
-            Intent goToAddATaskIntent = new Intent(this, AddTaskActivity.class);
-            startActivity(goToAddATaskIntent);
-        });
+        super.onResume();
+        Amplify.API.query(
+                ModelQuery.list(Task.class),
+                success -> {
+                    taskList.clear();
+                    Log.i(TAG, "Read Tasks successfully!");
+                    for (Task databaseSuperPet : success.getData()) {
+                        taskList.add(databaseSuperPet);
+                    }
+                    runOnUiThread(() -> adapter.notifyDataSetChanged()); // since this runs asynchronously, the adapter may already have rendered, so we have to tell it to update
+                },
+                failure -> Log.e(TAG, "FAILED to read Tasks from the Database")
+        );
 
-        ImageButton settingsButton = (ImageButton) findViewById(R.id.MainActivitySettingsButton);
-        settingsButton.setOnClickListener(v -> {
-            Intent goToSettingsIntent = new Intent(this, SettingsActivity.class);
-            startActivity(goToSettingsIntent);
-        });
+//        String userUserName = preferences.getString(USER_USERNAME_TAG, "No Username");
+//        ((TextView)findViewById(R.id.MainActivityUserNameTextView)).setText(userUserName + "'s Tasks");
+//        adapter.notifyDataSetChanged();
     }
     public void taskRecyclerView() {
+        taskList = new ArrayList<>();
         RecyclerView tasksRecyclerView = findViewById(R.id.MainActivityRecyclerView);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
         tasksRecyclerView.setLayoutManager(layoutManager);
@@ -74,40 +77,25 @@ public class MainActivity extends AppCompatActivity {
         tasksRecyclerView.setAdapter(adapter);
     }
 
-    @Override
-    protected void  onResume() {
+    public void setupBttns() {
+        Button allTasksButton = findViewById(R.id.MainActivityAllTasksButton);
+        allTasksButton.setOnClickListener(v -> {
+            Intent goToAllTasksIntent = new Intent(this, AllTasksActivity.class);
+            startActivity(goToAllTasksIntent);
+        });
 
-        super.onResume();
-        taskList.clear();
-        taskList.addAll(taskMasterDatabase.taskDao().findAll());
-        String userUserName = preferences.getString(USER_USERNAME_TAG, "No Username");
-        ((TextView)findViewById(R.id.MainActivityUserNameTextView)).setText(userUserName + "'s Tasks");
-        adapter.notifyDataSetChanged();
+        Button addATaskButton = findViewById(R.id.MainActivityAddATaskButton);
+        addATaskButton.setOnClickListener(v -> {
+            Intent goToAddATaskIntent = new Intent(this, AddTaskActivity.class);
+            startActivity(goToAddATaskIntent);
+        });
+
+        ImageButton settingsButton = findViewById(R.id.MainActivitySettingsButton);
+        settingsButton.setOnClickListener(v -> {
+            Intent goToSettingsIntent = new Intent(this, SettingsActivity.class);
+            startActivity(goToSettingsIntent);
+        });
     }
 }
 
-
-//        TextView taskDetailButtonOne = (TextView) findViewById(R.id.MainActivityBudgetButton);
-//        taskDetailButtonOne.setOnClickListener(v -> {
-//            String taskDetail = taskDetailButtonOne.getText().toString();
-//            Intent goToTaskDetailIntent = new Intent(this, TaskDetailActivity.class);
-//            goToTaskDetailIntent.putExtra(TASK_ADD_EXTRA_TAG, taskDetail);
-//            startActivity(goToTaskDetailIntent);
-//        });
-//
-//        TextView taskDetailButtonTwo = (TextView) findViewById(R.id.MainActivityLearnFrenchButton);
-//        taskDetailButtonTwo.setOnClickListener(v -> {
-//            String taskDetail = taskDetailButtonTwo.getText().toString();
-//            Intent goToTaskDetailIntent = new Intent(this, TaskDetailActivity.class);
-//            goToTaskDetailIntent.putExtra(TASK_ADD_EXTRA_TAG, taskDetail);
-//            startActivity(goToTaskDetailIntent);
-//        });
-//
-//        TextView taskDetailButtonThree = (TextView) findViewById(R.id.MainActivityWatchYouPeopleButton);
-//        taskDetailButtonThree.setOnClickListener(v -> {
-//            String taskDetail = taskDetailButtonThree.getText().toString();
-//            Intent goToTaskDetailIntent = new Intent(this, TaskDetailActivity.class);
-//            goToTaskDetailIntent.putExtra(TASK_ADD_EXTRA_TAG, taskDetail);
-//            startActivity(goToTaskDetailIntent);
-//        });
 
