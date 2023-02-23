@@ -1,11 +1,19 @@
 # This "input" configures a global authorization rule to enable public access to
 # all models in this schema. Learn more about authorization rules here: https://docs.amplify.aws/cli/graphql/authorization-rules
 
+type Team @model @auth(rules: [{allow: public}]){
+    id:ID!
+    name: String!
+    tasks: [Task] @hasMany(indexName: "byTeams", fields: ["id"])
+}
+
 type Task @model @auth(rules: [{allow: public}]){
     id: ID!
+    teamId: ID! @index(name: "byTeams", sortKeyFields: ["taskTitle"])
     taskTitle: String!
     taskBody: String!
     taskState: TaskStateEnum!
+    team: Team @belongsTo(fields: ["teamId"])
 }
 
 enum TaskStateEnum {
