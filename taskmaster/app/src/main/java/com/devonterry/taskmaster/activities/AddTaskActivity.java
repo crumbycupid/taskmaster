@@ -14,10 +14,12 @@ import com.amplifyframework.api.graphql.model.ModelMutation;
 import com.amplifyframework.core.Amplify;
 import com.amplifyframework.datastore.generated.model.Task;
 import com.amplifyframework.datastore.generated.model.TaskStateEnum;
+import com.amplifyframework.datastore.generated.model.Team;
 import com.devonterry.taskmaster.R;
 
 public class AddTaskActivity extends AppCompatActivity {
     Spinner taskTypeSpinner;
+    Spinner taskTeamSpinner;
 
     public final String TAG = "MainActivity";
 
@@ -26,11 +28,43 @@ public class AddTaskActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_task);
         taskTypeSpinner = findViewById(R.id.AddTaskActivityStateSpinner);
-        taskTypeSpinner();
+        taskTeamSpinner = findViewById(R.id.AddTaskActivityTeamSpinner);
+
+        Team team1 = Team.builder()
+                .name("Red")
+                .id("")
+                .build();
+
+        Team team2 = Team.builder()
+                .name("Green")
+                .id("")
+                .build();
+
+        Team team3 = Team.builder()
+                .name("Blue")
+                .id("")
+                .build();
+        Amplify.API.mutate(
+                ModelMutation.create(team1),
+                success ->{},
+                failure ->{}
+        );
+        Amplify.API.mutate(
+                ModelMutation.create(team2),
+                success ->{},
+                failure ->{}
+        );
+        Amplify.API.mutate(
+                ModelMutation.create(team3),
+                success ->{},
+                failure ->{}
+        );
+
+        setupSpinners();
         saveButton();
     }
 
-    public void taskTypeSpinner(){
+    public void setupSpinners(){
         taskTypeSpinner.setAdapter(new ArrayAdapter<>(
                 this,
                 android.R.layout.simple_spinner_item,
