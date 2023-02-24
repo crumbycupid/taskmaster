@@ -43,16 +43,16 @@ public class TaskRecyclerViewAdapter extends RecyclerView.Adapter <TaskRecyclerV
         TextView taskFragBodyView = holder.itemView.findViewById(R.id.TaskFragTVBody);
         TextView taskFragStateView = holder.itemView.findViewById((R.id.TaskFragTVState));
         String taskTitle = taskList.get(position).getTaskTitle();
-        String taskBody = taskList.get(position).getTaskBody();
-//        Enum taskState = taskList.get(position).getTaskStateEnum();
+//        String taskBody = String.valueOf(())
+//      String taskState = taskList.get(position).getTaskStateEnum();
         taskFragNameView.setText(taskTitle);
-        taskFragBodyView.setText(taskBody);
+//        taskFragBodyView.setText(taskBody);
 //        taskFragStateView.setText(taskState);
         View userTaskViewHolder = holder.itemView;
         userTaskViewHolder.setOnClickListener(v ->{
             Intent goToUserTasksDetailsIntent = new Intent(callingActivity, TaskDetailActivity.class);
             goToUserTasksDetailsIntent.putExtra(USER_TASK_TITLE_TAG, taskTitle);
-            goToUserTasksDetailsIntent.putExtra(USER_TASK_BODY_TAG, taskBody);
+//            goToUserTasksDetailsIntent.putExtra(USER_TASK_BODY_TAG, taskBody);
 //            goToUserTasksDetailsIntent.putExtra(USER_TASK_STATE_TAG, taskState);
             callingActivity.startActivity(goToUserTasksDetailsIntent);
         });
