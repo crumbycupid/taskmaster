@@ -33,7 +33,7 @@
             android:id="@+id/AddTaskActivityAddButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="172dp"
+            android:layout_marginBottom="128dp"
             android:backgroundTint="#269D31"
             android:onClick="@string/Submitted"
             android:text="@string/add"
@@ -109,10 +109,12 @@
             android:layout_width="206dp"
             android:layout_height="48dp"
             android:layout_marginTop="20dp"
-            android:layout_marginEnd="60dp"
+            android:layout_marginEnd="56dp"
             android:contentDescription="@string/team"
+            app:layout_constraintBottom_toTopOf="@+id/AddTaskActivityTeamSpinner"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/AddTaskActivityDescriptionTV" />
+            app:layout_constraintTop_toBottomOf="@+id/AddTaskActivityDescriptionTV"
+            app:layout_constraintVertical_bias="0.0" />
 
         <TextView
             android:id="@+id/AddTaskActivityStateTV"
@@ -130,13 +132,24 @@
 
         <Spinner
             android:id="@+id/AddTaskActivityTeamSpinner"
-            android:layout_width="409dp"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
+            android:layout_width="229dp"
+            android:layout_height="48dp"
+            android:layout_marginStart="148dp"
+            android:layout_marginBottom="40dp"
             android:contentDescription="@string/team2"
             android:minHeight="48dp"
             app:layout_constraintBottom_toTopOf="@+id/AddActivitySubmittedTextView"
             app:layout_constraintStart_toStartOf="parent" />
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/teamSemiColon"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            tools:layout_editor_absoluteX="89dp"
+            tools:layout_editor_absoluteY="431dp" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
