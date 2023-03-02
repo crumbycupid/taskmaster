@@ -11,17 +11,26 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.amplifyframework.api.graphql.model.ModelMutation;
+import com.amplifyframework.api.graphql.model.ModelQuery;
 import com.amplifyframework.core.Amplify;
 import com.amplifyframework.datastore.generated.model.Task;
 import com.amplifyframework.datastore.generated.model.TaskStateEnum;
 import com.amplifyframework.datastore.generated.model.Team;
 import com.devonterry.taskmaster.R;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.ExecutionException;
+
 public class AddTaskActivity extends AppCompatActivity {
+    public final String TAG = "addTaskActivity";
     Spinner taskTypeSpinner;
     Spinner taskTeamSpinner;
+    CompletableFuture<List<Team>> taskTeamFuture = new CompletableFuture<>();
+    ArrayList<String> teamNames;
+    ArrayList<Team> teams;
 
-    public final String TAG = "MainActivity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,35 +39,51 @@ public class AddTaskActivity extends AppCompatActivity {
         taskTypeSpinner = findViewById(R.id.AddTaskActivityStateSpinner);
         taskTeamSpinner = findViewById(R.id.AddTaskActivityTeamSpinner);
 
-        Team team1 = Team.builder()
-                .name("Red")
-                .id("")
-                .build();
+        teamNames = new ArrayList<>();
+        taskTeam = new ArrayList<>();
 
-        Team team2 = Team.builder()
-                .name("Green")
-                .id("")
-                .build();
+        //CompletableFuture
+        Amplify.API.query(
+                ModelQuery.list(Team.class),
+                success -> {
+                    Log.i(TAG, "Read Team successfully!");
+                    for (Team databaseTeam : success.getData()){
+                    teamNames.add(databaseTeam.getName());
+                    teams.add(databaseTeam);
+                }
+                    taskTeamFuture.complete(teams);
+                    runOnUiThread(this::);
+        )
 
-        Team team3 = Team.builder()
-                .name("Blue")
-                .id("")
-                .build();
-        Amplify.API.mutate(
-                ModelMutation.create(team1),
-                success ->{},
-                failure ->{}
-        );
-        Amplify.API.mutate(
-                ModelMutation.create(team2),
-                success ->{},
-                failure ->{}
-        );
-        Amplify.API.mutate(
-                ModelMutation.create(team3),
-                success ->{},
-                failure ->{}
-        );
+//        Team team1 = Team.builder()
+//                .name("Red")
+//                .id("")
+//                .build();
+//
+//        Team team2 = Team.builder()
+//                .name("Green")
+//                .id("")
+//                .build();
+//
+//        Team team3 = Team.builder()
+//                .name("Blue")
+//                .id("")
+//                .build();
+//        Amplify.API.mutate(
+//                ModelMutation.create(team1),
+//                success ->{},
+//                failure ->{}
+//        );
+//        Amplify.API.mutate(
+//                ModelMutation.create(team2),
+//                success ->{},
+//                failure ->{}
+//        );
+//        Amplify.API.mutate(
+//                ModelMutation.create(team3),
+//                success ->{},
+//                failure ->{}
+//        );
 
         setupSpinners();
         saveButton();
@@ -72,12 +97,22 @@ public class AddTaskActivity extends AppCompatActivity {
         ));
     }
     public void saveButton(){
-        Button addTaskButton = (Button) findViewById(R.id.AddTaskActivityAddButton);
-        addTaskButton.setOnClickListener(v -> {
+    findViewById(R.id.AddTaskActivityAddButton).setOnClickListener(v -> {
+            String selectedTaskTeamName = taskTeamSpinner.getSelectedItem().toString();
+            try {
+                teams = (ArrayList<Team>) taskTeamFuture.get();
+            }catch (InterruptedException ie){
+                ie.printStackTrace();
+            } catch (ExecutionException ee){
+                ee.printStackTrace();
+            }
+
+            Team selectedTeam = teams.stream().filter(team -> team.getName().equals(selectedTaskTeamName)).findAny().orElseThrow(RuntimeException::new);
             Task newTask = Task.builder()
                     .taskTitle(((EditText)findViewById(R.id.AddTaskActivityAddTaskEditTextBox)).getText().toString())
                     .taskBody(((TextView) findViewById(R.id.AddTaskActivityDescriptionTextView)).getText().toString())
                     .taskState((TaskStateEnum)taskTypeSpinner.getSelectedItem())
+                    .team(selectedTeam)
                     .build();
 
             Amplify.API.mutate(
