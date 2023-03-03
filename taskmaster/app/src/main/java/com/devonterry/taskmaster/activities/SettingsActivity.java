@@ -37,7 +37,7 @@ public class SettingsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
-        teamSpinner = findViewById(R.id.AddTaskActivityTeamSpinner);
+//        teamSpinner = findViewById(R.id.AddTaskActivityTeamSpinner);
         teamNames = new ArrayList<>();
         taskTeam = new ArrayList<>();
 
@@ -77,9 +77,9 @@ public class SettingsActivity extends AppCompatActivity {
             EditText editUsernameText = findViewById(R.id.SettingsActivityNameInputTextView);
             String selectedTaskTeamStringName = teamSpinner.getSelectedItem().toString();
             SharedPreferences.Editor preferencesEditor = preferences.edit();
-            String userUsernameString = userUsernameEditText.getText().toString();
+//            String userUsernameString = userUsernameEditText.getText().toString();
 
-            preferencesEditor.putString(USER_USERNAME_TAG, userUsernameString);
+//            preferencesEditor.putString(USER_USERNAME_TAG, userUsernameString);
             preferencesEditor.putString(CHOOSE_TEAM_TAG, selectedTaskTeamStringName);
             preferencesEditor.apply();
 

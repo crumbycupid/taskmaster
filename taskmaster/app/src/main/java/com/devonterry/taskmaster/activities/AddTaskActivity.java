@@ -36,25 +36,81 @@ public class AddTaskActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_task);
+
+
+
         taskTypeSpinner = findViewById(R.id.AddTaskActivityStateSpinner);
         taskTeamSpinner = findViewById(R.id.AddTaskActivityTeamSpinner);
 
         teamNames = new ArrayList<>();
-        taskTeam = new ArrayList<>();
+        teams = new ArrayList<>();
 
         //CompletableFuture
         Amplify.API.query(
                 ModelQuery.list(Team.class),
                 success -> {
                     Log.i(TAG, "Read Team successfully!");
-                    for (Team databaseTeam : success.getData()){
-                    teamNames.add(databaseTeam.getName());
-                    teams.add(databaseTeam);
-                }
+                    for (Team databaseTeam : success.getData()) {
+                        teamNames.add(databaseTeam.getName());
+                        teams.add(databaseTeam);
+                    }
                     taskTeamFuture.complete(teams);
-                    runOnUiThread(this::);
-        )
+                    runOnUiThread(this::setupSpinners);
+                },
+                failure ->{
+                    taskTeamFuture.complete(null);
+                    Log.e(TAG, "FAILED to read teams" + failure);
+                }
+        );
 
+
+        setupSpinners();
+        saveButton();
+    }
+
+    public void setupSpinners(){
+        taskTypeSpinner.setAdapter(new ArrayAdapter<>(
+                this,
+                android.R.layout.simple_spinner_item,
+                TaskStateEnum.values()
+        ));
+        taskTeamSpinner.setAdapter((new ArrayAdapter<>(
+                this,
+                android.R.layout.simple_spinner_item,
+                teamNames
+        )));
+    }
+    public void saveButton(){
+    findViewById(R.id.AddTaskActivityAddButton).setOnClickListener(v -> {
+            String selectedTaskTeamName = taskTeamSpinner.getSelectedItem().toString();
+            try {
+                teams = (ArrayList<Team>) taskTeamFuture.get();
+            }catch (InterruptedException | ExecutionException ie){
+                ie.printStackTrace();
+            }
+
+            Team selectedTeam = teams.stream().filter(team -> team.getName().equals(selectedTaskTeamName)).findAny().orElseThrow(RuntimeException::new);
+            Task newTask = Task.builder()
+                    .taskTitle(((EditText)findViewById(R.id.AddTaskActivityAddTaskEditTextBox)).getText().toString())
+                    .taskBody(((TextView) findViewById(R.id.AddTaskActivityDescriptionTextView)).getText().toString())
+                    .taskState((TaskStateEnum)taskTypeSpinner.getSelectedItem())
+                    .team(selectedTeam)
+                    .build();
+
+            Amplify.API.mutate(
+                    ModelMutation.create(newTask),
+                    success -> Log.i(TAG, "Task created successfully!"),
+                    failure -> Log.e(TAG, "FAILED to create task!", failure)
+            );
+            TextView submittedTextView = (TextView) findViewById(R.id.AddActivitySubmittedTextView);
+            submittedTextView.setVisibility(View.VISIBLE);
+        });
+
+    }
+}
+
+
+// Hardcode team data
 //        Team team1 = Team.builder()
 //                .name("Red")
 //                .id("")
@@ -84,45 +140,3 @@ public class AddTaskActivity extends AppCompatActivity {
 //                success ->{},
 //                failure ->{}
 //        );
-
-        setupSpinners();
-        saveButton();
-    }
-
-    public void setupSpinners(){
-        taskTypeSpinner.setAdapter(new ArrayAdapter<>(
-                this,
-                android.R.layout.simple_spinner_item,
-                TaskStateEnum.values()
-        ));
-    }
-    public void saveButton(){
-    findViewById(R.id.AddTaskActivityAddButton).setOnClickListener(v -> {
-            String selectedTaskTeamName = taskTeamSpinner.getSelectedItem().toString();
-            try {
-                teams = (ArrayList<Team>) taskTeamFuture.get();
-            }catch (InterruptedException ie){
-                ie.printStackTrace();
-            } catch (ExecutionException ee){
-                ee.printStackTrace();
-            }
-
-            Team selectedTeam = teams.stream().filter(team -> team.getName().equals(selectedTaskTeamName)).findAny().orElseThrow(RuntimeException::new);
-            Task newTask = Task.builder()
-                    .taskTitle(((EditText)findViewById(R.id.AddTaskActivityAddTaskEditTextBox)).getText().toString())
-                    .taskBody(((TextView) findViewById(R.id.AddTaskActivityDescriptionTextView)).getText().toString())
-                    .taskState((TaskStateEnum)taskTypeSpinner.getSelectedItem())
-                    .team(selectedTeam)
-                    .build();
-
-            Amplify.API.mutate(
-                    ModelMutation.create(newTask),
-                    success -> Log.i(TAG, "Task created successfully!"),
-                    failure -> Log.e(TAG, "FAILED to create task!", failure)
-            );
-            TextView submittedTextView = (TextView) findViewById(R.id.AddActivitySubmittedTextView);
-            submittedTextView.setVisibility(View.VISIBLE);
-        });
-
-    }
-}
