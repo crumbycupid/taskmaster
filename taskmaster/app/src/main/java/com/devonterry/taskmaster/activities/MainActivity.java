@@ -19,11 +19,13 @@ import com.amplifyframework.api.graphql.model.ModelQuery;
 import com.amplifyframework.core.Amplify;
 import com.amplifyframework.datastore.generated.model.Task;
 import com.amplifyframework.datastore.generated.model.TaskStateEnum;
+import com.amplifyframework.datastore.generated.model.Team;
 import com.devonterry.taskmaster.R;
 import com.devonterry.taskmaster.adapter.TaskRecyclerViewAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.CompletableFuture;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -36,26 +38,18 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-//        Amplify.API.query(
-//                ModelQuery.list(Task.class),
-//                success -> {
-//                    taskList.clear();
-//                    Log.i(TAG, "Read Tasks successfully!");
-//                    for (Task databaseSuperPet : success.getData()) {
-//                        taskList.add(databaseSuperPet);
-//                    }
-//                    runOnUiThread(() -> adapter.notifyDataSetChanged()); // since this runs asynchronously, the adapter may already have rendered, so we have to tell it to update
-//                },
-//                failure -> Log.e(TAG, "FAILED to read Tasks from the Database")
-//        );
-//        Hardcoded Task Data
-//        taskList = new ArrayList<>();
-//        Task newTask = Task.builder()
-//                .taskTitle("run")
-//                        .taskBody("run")
-//                .taskState(TaskStateEnum.Assigned)
-//                        .build();
-//        taskList.add(newTask);
+        Amplify.API.query(
+                ModelQuery.list(Task.class),
+                success -> {
+                    taskList.clear();
+                    Log.i(TAG, "Read Tasks successfully!");
+                    for (Task databaseSuperPet : success.getData()) {
+                        taskList.add(databaseSuperPet);
+                    }
+                    runOnUiThread(() -> adapter.notifyDataSetChanged()); // since this runs asynchronously, the adapter may already have rendered, so we have to tell it to update
+                },
+                failure -> Log.e(TAG, "FAILED to read Tasks from the Database")
+        );
 
         taskRecyclerView();
         setupBttns();
@@ -119,3 +113,11 @@ public class MainActivity extends AppCompatActivity {
 }
 
 
+//        Hardcoded Task Data
+//        taskList = new ArrayList<>();
+//        Task newTask = Task.builder()
+//                .taskTitle("run")
+//                        .taskBody("run")
+//                .taskState(TaskStateEnum.Assigned)
+//                        .build();
+//        taskList.add(newTask);

@@ -12,7 +12,7 @@
         android:id="@+id/SettingsActivityNameInputTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="284dp"
+        android:layout_marginTop="280dp"
         android:layout_marginEnd="100dp"
         android:ems="10"
         android:hint="@string/inputUsernameHere"
@@ -21,17 +21,39 @@
         android:minHeight="48dp"
         android:textColorHint="#33691E"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.99"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/SettingsActivitySaveButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="172dp"
-        android:layout_marginBottom="292dp"
+        android:layout_marginBottom="216dp"
         android:backgroundTint="#289F2A"
         android:text="@string/save"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <com.google.android.material.chip.ChipGroup
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:layout_editor_absoluteX="191dp"
+        tools:layout_editor_absoluteY="413dp">
+
+    </com.google.android.material.chip.ChipGroup>
+
+    <Spinner
+        android:id="@+id/SettingsActivityChooseTeamSpinner"
+        android:layout_width="333dp"
+        android:layout_height="41dp"
+        app:layout_constraintBottom_toTopOf="@+id/SettingsActivitySaveButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/SettingsActivityNameInputTextView"
+        tools:autofillHints="@string/chooseTeam" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
